@@ -651,4 +651,17 @@ describe('assert', function () {
     }, 'expected [ 1, 54 ] to have the same members as [ 6, 1, 54 ]');
   });
 
+  it('memberDeepEquals', function() {
+    assert.sameDeepMembers([ {b: 3}, {a: 2}, {c: 5} ], [ {c: 5}, {b: 3}, {a: 2} ], 'same deep members');
+    assert.sameDeepMembers([ {b: 3}, {a: 2}, 5, "hello" ], [ "hello", 5, {b: 3}, {a: 2} ], 'same deep members');
+    
+    err(function() {
+      assert.sameDeepMembers([ {b: 3} ], [ {c: 3} ])
+    }, 'expected [ { b: 3 } ] to have the same members as [ { c: 3 } ]');
+
+    err(function() {
+      assert.sameDeepMembers([ {b: 3} ], [ {b: 5} ])
+    }, 'expected [ { b: 3 } ] to have the same members as [ { b: 5 } ]');
+  });
+
 });
